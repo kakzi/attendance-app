@@ -23,6 +23,7 @@ class User extends Authenticatable
         'password',
         'is_admin',
         'photo',
+        'username',
         'device'
     ];
 
@@ -48,5 +49,10 @@ class User extends Authenticatable
     public function attendances()
     {
         return $this->hasMany(Attendance::class);
+    }
+
+    public function getPhotoAttribute($photo)
+    {
+        return asset('storage/photo/'.$photo);
     }
 }

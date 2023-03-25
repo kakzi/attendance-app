@@ -15,4 +15,9 @@ class AttendanceDetail extends Model
     {
         return $this->belongsTo(Attendance::class);
     }
+
+    public function getPhotoAttribute($photo)
+    {
+        return asset('storage/absensi/'.$photo);
+    }
 }
