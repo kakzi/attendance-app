@@ -21,7 +21,7 @@ class AttendanceController extends Controller
             'lat' => 'required',
             'address' => 'required',
             'type' => 'required',
-            'photo' => 'required|image|mimes:jpeg,jpg,png|max:2000',
+            'photo' => 'required|image|mimes:jpeg,jpg,png',
         ]);
         
         if ($validator->fails()) {
