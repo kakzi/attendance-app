@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\AttendanceExport;
 use App\Http\Controllers\Controller;
 use App\Models\Attendance;
 use Illuminate\Http\Request;
@@ -45,12 +46,6 @@ class ReportController extends Controller
         $date_from  = $request->date_from;
         $date_to    = $request->date_to;
 
-        //get data donation by range date
-        $donations = Donation::with('donatur', 'category', 'program')->where('status', 'success')->whereDate('created_at', '>=', $request->date_from)->whereDate('created_at', '<=', $request->date_to)->get();
-
-        //get total donation by range date    
-        $total = Donation::where('status', 'success')->whereDate('created_at', '>=', $request->date_from)->whereDate('created_at', '<=', $request->date_to)->sum('amount');
-
-        return (new DonationExport)->forRange($date_from, $date_to)->download('invoices.xlsx');
+        return (new AttendanceExport)->forRange($date_from, $date_to)->download('report-attendance.xlsx');
     }
 }

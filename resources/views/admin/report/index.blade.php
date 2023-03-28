@@ -58,6 +58,9 @@
                                             <span class="text-white text-right">Nama Santri</span>
                                         </th>
                                         <th class="px-8 py-2 ">
+                                            <span class="text-white text-right">Jabatan</span>
+                                        </th>
+                                        <th class="px-8 py-2 ">
                                             <span class="text-white text-right">Kantor</span>
                                         </th>
                                         <th class="px-8 py-2 ">
@@ -72,9 +75,6 @@
                                         <th class="px-8 py-2">
                                             <span class="text-white text-right">Pulang</span>
                                         </th>
-                                        <th class="px-8 py-2">
-                                            <span class="text-white text-right">Catatan</span>
-                                        </th>
                                         <th class="px-8 py-2 ">
                                             <span class="text-white text-right">Point</span>
                                         </th>
@@ -87,21 +87,31 @@
                                             <td class="px-8 py-2 text-xs">
                                                 {{ $attendance->employment->name }}
                                             </td>
+                                            <td class="px-8 py-2 text-xs">
+                                                {{ $attendance->employment->jabatan }}
+                                            </td>
                                             <td class="px-8 py-2 text-xs text-center">
                                                 {{ $attendance->office->name }}
                                             </td>
                                             <td class="px-8 py-2  text-xs text-center">
-                                                {{ $attendance->created_at }}
+                                                {{ date('d-m-Y', strtotime($attendance->created_at)) }}
                                             </td>
                                             <td class="px-8 py-2  text-xs text-center">
                                                 {{ $attendance->detail[0]->pukul }}
+                                                @if ($attendance->detail[0]->keterangan == "Telat")
+                                                <span class="bg-red-700 text-white text-xs font-bold mr-2 px-2.5 py-0.5 rounded-full ml-2">Telat</span>
+                                                @elseif ($attendance->detail[0]->keterangan == "Datang")
+                                                <span class="bg-green-600 text-white text-xs font-bold mr-2 px-2.5 py-0.5 rounded-full ml-2">Datang</span>
+                                                @endif                                                                                 
                                             </td>
                                             
                                             <td class="px-8 py-2  text-xs text-center">
                                                 {{ $attendance->detail[1]->pukul }}
-                                            </td>
-                                            <td class="px-8 py-2  text-xs text-center">
-                                                {{ $attendance->detail[1]->keterangan }}
+                                                @if ($attendance->detail[1]->keterangan == "Pulang Awal")
+                                                <span class="bg-red-700 text-white text-xs font-bold mr-2 px-2.5 py-0.5 rounded-full ml-2">Pulang Awal</span>
+                                                @elseif ($attendance->detail[1]->keterangan == "Pulang")
+                                                <span class="bg-green-600 text-white text-xs font-bold mr-2 px-2.5 py-0.5 rounded-full ml-2">Pulang</span>
+                                                @endif
                                             </td>
                                             <td class="px-8 py-2 text-xs text-center">
                                                 {{ $attendance->detail[0]->point + $attendance->detail[1]->point }}
