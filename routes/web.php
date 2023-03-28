@@ -1,10 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\EmploymentController;
 use App\Http\Controllers\Admin\OfficeController;
 use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\EmploymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/report', [ReportController::class, 'index'])->name('admin.report.index');
         Route::get('/report/filter', [ReportController::class, 'filter'])->name('admin.report.filter');
         Route::get('/report/download', [ReportController::class, 'download'])->name('admin.report.download');
-
     });
+    //route profile
+    Route::get('/profile', [ProfileController::class, 'index'])->name('admin.profile.index');
 });
