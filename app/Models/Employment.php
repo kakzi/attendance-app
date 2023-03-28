@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
-class User extends Authenticatable
+class Employment extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -19,9 +19,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'office_id',
         'name',
-        'email',
+        'username',
         'password',
+        'jabatan',
+        'avatar'
     ];
 
     /**
@@ -32,8 +35,6 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
-        'two_factor_secret',
-        'two_factor_recovery_codes'
     ];
 
     /**
@@ -48,6 +49,10 @@ class User extends Authenticatable
     public function attendances()
     {
         return $this->hasMany(Attendance::class);
+    }
+    public function office()
+    {
+        return $this->belongsTo(Office::class);
     }
 
     protected function avatar(): Attribute

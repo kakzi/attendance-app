@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Employment;
 use Illuminate\Support\Carbon;
 use App\Models\AttendanceDetail;
 use Illuminate\Database\Eloquent\Model;
@@ -25,8 +26,12 @@ class Attendance extends Model
         return $this->hasMany(AttendanceDetail::class);
     }
 
-    public function user()
+    public function employment()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Employment::class);
+    }
+    public function office()
+    {
+        return $this->belongsTo(Office::class);
     }
 }
