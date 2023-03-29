@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('tanggal');
             $table->string('pukul');
             $table->bigInteger('point');
+            $table->string('distance');
             $table->string('keterangan');
             $table->enum('type', ['in', 'out']);
             $table->timestamps();

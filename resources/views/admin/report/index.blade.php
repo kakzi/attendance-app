@@ -67,13 +67,13 @@
                                             <span class="text-white text-right">Absensi</span>
                                         </th>
                                         <th class="px-8 py-2 text-left">
-                                            <span class="text-white text-right">Datang</span>
+                                            <span class="text-white text-right">Check In</span>
                                         </th>
                                         {{-- <th class="px-8 py-2 text-center">
                                             <span class="text-white text-right">Catatan</span>
                                         </th> --}}
                                         <th class="px-8 py-2">
-                                            <span class="text-white text-right">Pulang</span>
+                                            <span class="text-white text-right">Check Out</span>
                                         </th>
                                         <th class="px-8 py-2 ">
                                             <span class="text-white text-right">Point</span>
@@ -105,16 +105,24 @@
                                                 @endif                                                                                 
                                             </td>
                                             
-                                            <td class="px-8 py-2  text-xs text-center">
-                                                {{ $attendance->detail[1]->pukul }}
-                                                @if ($attendance->detail[1]->keterangan == "Pulang Awal")
-                                                <span class="bg-red-700 text-white text-xs font-bold mr-2 px-2.5 py-0.5 rounded-full ml-2">Pulang Awal</span>
-                                                @elseif ($attendance->detail[1]->keterangan == "Pulang")
-                                                <span class="bg-green-600 text-white text-xs font-bold mr-2 px-2.5 py-0.5 rounded-full ml-2">Pulang</span>
+                                            <td class="px-8 py-2 text-xs text-center">
+                                                @if (count($attendance->detail) == 1)
+                                                    <span class="bg-purple-600 text-white text-xs font-bold mr-2 px-2.5 py-0.5 rounded-full ml-2">-</span>
+                                                @else
+                                                    {{ $attendance->detail[1]->pukul }}
+                                                    @if ($attendance->detail[1]->keterangan == "Pulang Awal")
+                                                    <span class="bg-red-700 text-white text-xs font-bold mr-2 px-2.5 py-0.5 rounded-full ml-2">Pulang Awal</span>
+                                                    @elseif ($attendance->detail[1]->keterangan == "Pulang")
+                                                    <span class="bg-green-600 text-white text-xs font-bold mr-2 px-2.5 py-0.5 rounded-full ml-2">Pulang</span>
+                                                    @endif
                                                 @endif
                                             </td>
                                             <td class="px-8 py-2 text-xs text-center">
-                                                {{ $attendance->detail[0]->point + $attendance->detail[1]->point }}
+                                                @if (count($attendance->detail) == 1)
+                                                    {{ $attendance->detail[0]->point  }}
+                                                @else
+                                                    {{ $attendance->detail[0]->point + $attendance->detail[1]->point  }}
+                                                @endif
                                             </td>
                                         </tr>
                                     @empty

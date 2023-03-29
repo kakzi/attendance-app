@@ -75,6 +75,7 @@ class AttendanceController extends Controller
                             'keterangan' => "Telat",
                             'long' => $request->long,
                             'lat' => $request->lat,
+                            'distance' => $request->distance,
                             'photo' => $image->hashName(),
                             'address' => $request->address
                         ]
@@ -96,6 +97,7 @@ class AttendanceController extends Controller
                             'keterangan' => "Datang",
                             'long' => $request->long,
                             'lat' => $request->lat,
+                            'distance' => $request->distance,
                             'photo' => $image->hashName(),
                             'address' => $request->address
                         ]
@@ -159,6 +161,7 @@ class AttendanceController extends Controller
                             'keterangan' => "Pulang Awal",
                             'long' => $request->long,
                             'lat' => $request->lat,
+                            'distance' => $request->distance,
                             'photo' => $image->hashName(),
                             'address' => $request->address
                         ]
@@ -181,6 +184,7 @@ class AttendanceController extends Controller
                             'keterangan' => "Pulang Awal",
                             'long' => $request->long,
                             'lat' => $request->lat,
+                            'distance' => $request->distance,
                             'photo' => $image->hashName(),
                             'address' => $request->address
                         ]
@@ -203,6 +207,7 @@ class AttendanceController extends Controller
                             'keterangan' => "Pulang",
                             'long' => $request->long,
                             'lat' => $request->lat,
+                            'distance' => $request->distance,
                             'photo' => $image->hashName(),
                             'address' => $request->address
                         ]
