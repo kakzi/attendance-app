@@ -36,8 +36,10 @@ class AttendanceController extends Controller
         $attendanceType = $request->type;
         $userAttendanceToday = $request->user()
             ->attendances()
-            ->whereDate('created_at', Carbon::today())
+            ->whereDate('date_absensi', Carbon::today())
             ->first();
+        
+        $current_date = Carbon::now("Asia/Jakarta");
 
         if ($attendanceType == 'in') {
             if (! $userAttendanceToday) {
@@ -47,11 +49,12 @@ class AttendanceController extends Controller
                     ->create(
                         [
                             'status' => false,
+                            'date_absensi' => $current_date,
                             'office_id' => $request->office_id
                         ]
                     );
 
-                $current_date = Carbon::now("Asia/Jakarta");
+                // $current_date = Carbon::now("Asia/Jakarta");
                 $date = $current_date->format('Y-m-d');
                 $time = $current_date->format('H:i');
                 $start = '06:02';
@@ -70,7 +73,7 @@ class AttendanceController extends Controller
                         [
                             'type' => 'in',
                             'point' => 0,
-                            'tanggal' => $date,
+                            'tanggal' => $current_date,
                             'pukul' => $time,
                             'keterangan' => "Telat",
                             'long' => $request->long,
@@ -92,7 +95,7 @@ class AttendanceController extends Controller
                         [
                             'type' => 'in',
                             'point' => 1,
-                            'tanggal' => $date,
+                            'tanggal' => $current_date,
                             'pukul' => $time,
                             'keterangan' => "Datang",
                             'long' => $request->long,
@@ -138,7 +141,7 @@ class AttendanceController extends Controller
                     ]
                 );
 
-                $current_date = Carbon::now("Asia/Jakarta");
+                // $current_date = Carbon::now("Asia/Jakarta");
                 $date = $current_date->format('Y-m-d');
                 $time = $current_date->format('H:i');
                 $start = '13:02';
@@ -156,7 +159,7 @@ class AttendanceController extends Controller
                         [
                             'type' => 'out',
                             'point' => 0,
-                            'tanggal' => $date,
+                            'tanggal' => $current_date,
                             'pukul' => $time,
                             'keterangan' => "Pulang Awal",
                             'long' => $request->long,
@@ -179,7 +182,7 @@ class AttendanceController extends Controller
                         [
                             'type' => 'out',
                             'point' => 0,
-                            'tanggal' => $date,
+                            'tanggal' => $current_date,
                             'pukul' => $time,
                             'keterangan' => "Pulang Awal",
                             'long' => $request->long,
@@ -202,7 +205,7 @@ class AttendanceController extends Controller
                         [
                             'type' => 'out',
                             'point' => 1,
-                            'tanggal' => $date,
+                            'tanggal' => $current_date,
                             'pukul' => $time,
                             'keterangan' => "Pulang",
                             'long' => $request->long,
@@ -243,20 +246,12 @@ class AttendanceController extends Controller
 
         $history = $request->user()->attendances()->with('detail')
             ->whereBetween(
-                DB::raw('DATE(created_at)'),
+                DB::raw('DATE(date_absensi)'),
                 [
                     $request->from, $request->to
                 ]
             )->get();
 
-
-        // $history = Attendance::with('user','detail')
-        //     ->whereBetween(
-        //         DB::raw('DATE(created_at)'),
-        //         [
-        //             $request->from, $request->to
-        //         ]
-        //     )->get();
 
         return response()->json(
             [

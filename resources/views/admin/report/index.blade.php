@@ -48,7 +48,7 @@
             @if ($attendances ?? '')
 
                 @if (count($attendances) > 0)
-
+          
                     <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
                         <div class="inline-block min-w-full shadow-sm rounded-lg overflow-hidden">
                             <table class="min-w-full table-auto">
@@ -140,6 +140,12 @@
                                     </tr> --}}
                                 </tbody>
                             </table>
+
+                            @if ($attendances->hasPages())
+                                <div class="bg-white p-3">
+                                    {{ $attendances->links('vendor.pagination.tailwind') }}
+                                </div>
+                            @endif
                         </div>
                     </div>
 

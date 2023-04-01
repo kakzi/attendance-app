@@ -29,7 +29,11 @@ class ReportController extends Controller
         $attendances = Attendance::with('employment','detail', 'office')
             ->whereDate('created_at', '>=', $request->date_from)
             ->whereDate('created_at', '<=', $request->date_to)
-            ->get();
+            ->paginate(10);
+
+        // $offices = Office::latest()->when(request()->q, function($offices) {
+        //     $offices = $offices->where('name', 'like', '%'. request()->q . '%');
+        // })->paginate(10);
 
         // dd($attendances);
 

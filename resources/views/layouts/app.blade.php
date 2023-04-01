@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <link rel="shortcut icon" type="image/jpg" href="https://i.imgur.com/UyXqJLi.png" />
+    <link rel="shortcut icon" type="image/jpg" href="https://i.imgur.com/64XAUij.png" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title }}</title>
     <!-- css -->
@@ -28,9 +28,8 @@
         <div :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'"
             class="fixed z-30 inset-y-0 left-0 w-64 transition duration-300 transform bg-gray-900 overflow-y-auto lg:translate-x-0 lg:static lg:inset-0">
             <div class="flex items-center justify-center mt-4 mb-3">
-                <div class="flex items-center">
-                    {{-- <img src="{{ url('storage/images/logobaruinvo.png') }}" alt="" title="" width="200" /> --}}
-                    <span class="text-white text-2xl mx-2 font-semibold">Attendance App</span>
+                <div class="flex items-center rounded-full">
+                    <img src="https://i.imgur.com/64XAUij.png"  alt="" title="" width="75" />
                 </div>
             </div>
 
